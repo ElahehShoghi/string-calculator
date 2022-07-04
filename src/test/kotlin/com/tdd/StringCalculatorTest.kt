@@ -26,6 +26,7 @@ class StringCalculatorTest {
     @Test
     fun shouldRaiseNumberFormatException_forInvalidNumbers() {
         assertFailsWith<StringCalculator.InvalidNumberException> {
+            stringCalculator.calculate("2,\n3")
             stringCalculator.calculate("hi,2")
         }
     }
@@ -38,5 +39,6 @@ class StringCalculatorTest {
     @Test
     fun shouldWorkCorrectly_forNewlinesAndCommasAsSeparatorTogether() {
         assertEquals(25, stringCalculator.calculate("10,14\n1"))
+        assertEquals(25, stringCalculator.calculate("10\n14,1"))
     }
 }
