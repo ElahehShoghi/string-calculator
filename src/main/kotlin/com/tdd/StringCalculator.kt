@@ -5,7 +5,7 @@ class StringCalculator {
     fun calculate(inputs: String): Long {
         if (inputs.trim() == "")
             return 0
-        val inputList = inputs.split(delimiters = arrayOf(","), ignoreCase = false, limit = 0)
+        val inputList = inputs.split(delimiters = arrayOf(",", "\n"), ignoreCase = false, limit = 0)
         val inputNumbers: List<Long>
         try {
             inputNumbers = inputList.map { it.toLong() }
