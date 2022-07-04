@@ -28,4 +28,9 @@ class StringCalculatorTest {
             StringCalculator().calculate("hi,2")
         }
     }
+
+    @Test
+    fun shouldWorkCorrectly_forNewlineSeparator() {
+        assertEquals(15, StringCalculator().calculate("14\n1"))
+    }
 }
