@@ -41,4 +41,11 @@ class StringCalculatorTest {
         assertEquals(25, stringCalculator.calculate("10,14\n1"))
         assertEquals(25, stringCalculator.calculate("10\n14,1"))
     }
+
+    @Test
+    fun shouldRaiseDelimiterPositionException_forInputsWithDelimiterAtTheEnd(){
+        assertFailsWith<DelimiterPositionException> {
+            stringCalculator.calculate("1,2,")
+        }
+    }
 }
