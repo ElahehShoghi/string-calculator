@@ -2,6 +2,7 @@ package com.tdd
 
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class StringCalculatorTest {
 
@@ -19,5 +20,12 @@ class StringCalculatorTest {
     @Test
     fun shouldReturnInput_forOneNumberProvided() {
         assertEquals(2, StringCalculator().calculate("2"))
+    }
+
+    @Test
+    fun shouldRaiseNumberFormatException_forInvalidNumbers() {
+        assertFailsWith<InvalidNumberException> {
+            StringCalculator().calculate("hi,2")
+        }
     }
 }
