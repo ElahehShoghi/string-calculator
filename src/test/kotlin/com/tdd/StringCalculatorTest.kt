@@ -24,7 +24,7 @@ class StringCalculatorTest {
 
     @Test
     fun shouldRaiseNumberFormatException_forInvalidNumbers() {
-        assertFailsWith<InvalidNumberException> {
+        assertFailsWith<StringCalculator.InvalidNumberException> {
             StringCalculator().calculate("hi,2")
         }
     }
