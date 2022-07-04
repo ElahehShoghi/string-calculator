@@ -8,6 +8,7 @@ class StringCalculatorTest {
     @Test
     fun shouldSumCorrectly_forTwoNumbersSeperatedByCommas() {
         assertEquals(3, StringCalculator().calculate("1,2"))
+        assertEquals(13, StringCalculator().calculate("11,2"))
     }
 
     @Test
