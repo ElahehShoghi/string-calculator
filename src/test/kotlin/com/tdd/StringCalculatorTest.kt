@@ -14,4 +14,9 @@ class StringCalculatorTest {
     fun shouldReturnZero_forEmptyString() {
         assertEquals(0, StringCalculator().calculate(""))
     }
+
+    @Test
+    fun shouldReturnInput_forOneNumberProvided() {
+        assertEquals(2, StringCalculator().calculate("2"))
+    }
 }
