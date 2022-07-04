@@ -9,4 +9,9 @@ class StringCalculatorTest {
     fun shouldSumCorrectly_forTwoNumbersSeperatedByCommas() {
         assertEquals(3, StringCalculator().calculate("1,2"))
     }
+
+    @Test
+    fun shouldReturnZero_forEmptyString() {
+        assertEquals(0, StringCalculator().calculate(""))
+    }
 }
