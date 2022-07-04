@@ -34,4 +34,9 @@ class StringCalculatorTest {
     fun shouldWorkCorrectly_forNewlineSeparator() {
         assertEquals(15, stringCalculator.calculate("14\n1"))
     }
+
+    @Test
+    fun shouldWorkCorrectly_forNewlinesAndCommasAsSeparatorTogether() {
+        assertEquals(25, stringCalculator.calculate("10,14\n1"))
+    }
 }
