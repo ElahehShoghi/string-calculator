@@ -7,7 +7,7 @@ class StringCalculator {
             return 0
         if (inputs.endsWith(",") || inputs.endsWith("\n"))
             throw DelimiterPositionException("Delimiter must not be at the end!")
-        val inputList = inputs.split(",", "\n").toMutableList()
+        val inputList = inputs.split(",", "\n")
         val inputNumbers: List<Long>
         try {
             inputNumbers = inputList.map { it.toLong() }
@@ -19,5 +19,5 @@ class StringCalculator {
 
     class InvalidNumberException(msg: String?) : Exception(msg)
 
-    class DelimiterPositionException(msg: String) : Exception(msg)
+    class DelimiterPositionException(msg: String?) : Exception(msg)
 }
