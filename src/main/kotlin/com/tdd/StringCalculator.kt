@@ -5,13 +5,10 @@ class StringCalculator {
     fun calculate(inputs: String): Long {
         if (inputs.trim() == "")
             return 0
-        val firstNumber = getValueFromListByIndex(inputs.toList(), 0)
-        if (inputs.toList().size < 3)
+        val inputList = inputs.split(delimiters = arrayOf(","), ignoreCase = false, limit = 0)
+        val firstNumber = inputList[0].toLong()
+        if (inputList.size < 2)
             return firstNumber
-        return firstNumber.plus(getValueFromListByIndex(inputs.toList(), 2))
-    }
-
-    private fun getValueFromListByIndex(list: List<Char>, index: Int): Long {
-        return java.lang.Long.valueOf(list[index].toString())
+        return firstNumber.plus(inputList[1].toLong())
     }
 }
