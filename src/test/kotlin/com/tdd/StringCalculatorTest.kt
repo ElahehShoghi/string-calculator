@@ -60,8 +60,8 @@ class StringCalculatorTest {
     @Test
     fun shouldRaiseInvalidDelimiterException_forNotUsingOfDefinedDelimiter() {
         val exception = assertFailsWith<StringCalculator.InvalidDelimiterException> {
-            stringCalculator.calculate("//|\n1|2,3")
+            stringCalculator.calculate("//|\n1|2,10")
         }
-        assertEquals("‘|’ expected but ‘,’ found at position 3.", exception.message)
+        assertEquals("'|' expected but ',' found.", exception.message)
     }
 }
