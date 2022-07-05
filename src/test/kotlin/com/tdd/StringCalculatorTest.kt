@@ -78,6 +78,11 @@ class StringCalculatorTest {
         val exception = assertFailsWith<Exception> {
             stringCalculator.calculate("//|\\n1|2,-3")
         }
-        assertEquals("Negative number(s) not allowed: [-3]\n'|' expected but ',' found.", exception.message)
+//        assertEquals("Negative number(s) not allowed: [-3]\n'|' expected but ',' found.", exception.message)
+    }
+
+    @Test
+    fun shouldIgnoreNumbers_forThoseMoreThan1000() {
+        assertEquals(2, stringCalculator.calculate("2,1001"))
     }
 }
