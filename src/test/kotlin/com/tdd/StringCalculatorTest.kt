@@ -55,6 +55,13 @@ class StringCalculatorTest {
         assertEquals(4, stringCalculator.calculate("//;\n1;3"))
         assertEquals(6, stringCalculator.calculate("//|\n1|2|3"))
         assertEquals(7, stringCalculator.calculate("//sep\n2sep5"))
-        assertFailsWith<Exception> { stringCalculator.calculate("//|\n1|2,3") }
+    }
+
+    @Test
+    fun shouldRaiseInvalidDelimiterException_forNotUsingOfDefinedDelimiter() {
+        val exception = assertFailsWith<StringCalculator.InvalidDelimiterException> {
+            stringCalculator.calculate("//|\n1|2,3")
+        }
+        assertEquals("‘|’ expected but ‘,’ found at position 3.", exception.message)
     }
 }
