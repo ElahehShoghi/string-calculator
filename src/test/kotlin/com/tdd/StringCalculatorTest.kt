@@ -64,4 +64,12 @@ class StringCalculatorTest {
         }
         assertEquals("'|' expected but ',' found.", exception.message)
     }
+
+    @Test
+    fun shouldRaiseNegativeNumbersNotAllowedException_forNegativeNumbers() {
+        val exception = assertFailsWith<StringCalculator.NegativeNumbersNotAllowedException> {
+            stringCalculator.calculate("1,-2,-10")
+        }
+        assertEquals("Negative numbers not allowed: [-2, -10]", exception.message)
+    }
 }
