@@ -28,7 +28,7 @@ class StringCalculator {
         val negativeNumbers = numbers.filter { it < 0 }
         if (negativeNumbers.isNotEmpty())
             throw NegativeNumbersNotAllowedException("Negative numbers not allowed: $negativeNumbers")
-        return numbers.sum()
+        return numbers.sumOf { if (it > 1000) 0 else it }
     }
 
     class InvalidNumberException(msg: String?) : Exception(msg)
