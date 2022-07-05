@@ -18,15 +18,17 @@ class StringCalculator {
                     "'${delimiters[0]}' expected but '${inputs.replace(pattern, "")}' found."
                 )
         }
-        try {
-            val numbers = inputs.split(*delimiters).map { it.toLong() }
-            val negativeNumbers = numbers.filter { it < 0 }
-            if (negativeNumbers.isNotEmpty())
-                throw NegativeNumbersNotAllowedException("Negative numbers not allowed: $negativeNumbers")
-            return numbers.sum()
-        } catch (e: java.lang.NumberFormatException) {
-            throw InvalidNumberException(e.message)
+        val numbers = inputs.split(*delimiters).map {
+            try {
+                it.toLong()
+            } catch (e: Exception) {
+                throw InvalidNumberException(e.message)
+            }
         }
+        val negativeNumbers = numbers.filter { it < 0 }
+        if (negativeNumbers.isNotEmpty())
+            throw NegativeNumbersNotAllowedException("Negative numbers not allowed: $negativeNumbers")
+        return numbers.sum()
     }
 
     class InvalidNumberException(msg: String?) : Exception(msg)
