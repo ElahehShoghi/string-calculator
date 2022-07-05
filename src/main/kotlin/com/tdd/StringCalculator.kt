@@ -19,8 +19,12 @@ class StringCalculator {
                 )
         }
         try {
-            return inputs.split(*delimiters).sumOf { it.toLong() }
-        } catch (e: Exception) {
+            val numbers = inputs.split(*delimiters).map { it.toLong() }
+            val negativeNumbers = numbers.filter { it < 0 }
+            if (negativeNumbers.isNotEmpty())
+                throw NegativeNumbersNotAllowedException("Negative numbers not allowed: $negativeNumbers")
+            return numbers.sum()
+        } catch (e: java.lang.NumberFormatException) {
             throw InvalidNumberException(e.message)
         }
     }
@@ -30,4 +34,6 @@ class StringCalculator {
     class DelimiterPositionException(msg: String?) : Exception(msg)
 
     class InvalidDelimiterException(msg: String) : Exception(msg)
+
+    class NegativeNumbersNotAllowedException(msg: String) : Exception(msg)
 }
