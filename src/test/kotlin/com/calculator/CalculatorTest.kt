@@ -1,5 +1,8 @@
-package com.calculator.com.calculator
+package com.calculator
 
+import com.calculator.exception.DelimiterAtTheEndException
+import com.calculator.exception.InvalidDelimiterException
+import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -8,6 +11,8 @@ import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.assertEquals
 
 class CalculatorTest {
+
+    private val calculator = Calculator(CalculatorTokenizer(NegativeNumberFinder()))
 
     companion object {
         @JvmStatic
@@ -35,7 +40,6 @@ class CalculatorTest {
     @MethodSource("calculatorInputs")
     @ParameterizedTest
     fun testCalculate(input: String, expected: Int) {
-        val calculator = Calculator()
         val result = calculator.calculate(input)
         assertEquals(expected, result)
     }
@@ -44,15 +48,21 @@ class CalculatorTest {
     @ParameterizedTest
     fun testCalculateWithInvalidDelimiters(input: String, exceptionMessage: String) {
         val exception = assertThrows<InvalidDelimiterException> {
-            Calculator().calculate(input)
+            calculator.calculate(input)
         }
         assertEquals(exceptionMessage, exception.message)
     }
 
     @Test
     fun `should raise exception for delimiter at the end`() {
+        val calculator = Calculator(mockk())
         assertThrows<DelimiterAtTheEndException> {
-            Calculator().calculate("1,2,")
+            calculator.calculate("1,2,")
         }
+    }
+
+    @Test
+    fun `should ignore numbers more than 1000`() {
+        assertEquals(1, calculator.calculate("1,2000"))
     }
 }

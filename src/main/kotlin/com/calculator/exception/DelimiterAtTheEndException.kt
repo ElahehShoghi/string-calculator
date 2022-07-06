@@ -1,3 +1,3 @@
-package com.calculator.com.calculator
+package com.calculator.exception
 
 class DelimiterAtTheEndException : Exception()

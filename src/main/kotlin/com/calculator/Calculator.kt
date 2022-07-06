@@ -1,6 +1,8 @@
-package com.calculator.com.calculator
+package com.calculator
 
-class Calculator {
+import com.calculator.exception.DelimiterAtTheEndException
+
+class Calculator(private val tokenizer: CalculatorTokenizer) {
     fun calculate(s: String): Int {
         if (s == "")
             return 0
@@ -8,20 +10,11 @@ class Calculator {
             throw DelimiterAtTheEndException()
 
         val (input, delimiters) = getInputAndDelimiter(s)
-        val tokens = tokenize(input, delimiters)
-
-        validateTokens(tokens, delimiters.first(), input)
+        val tokens = tokenizer.tokenize(input, delimiters)
 
         return sumListOfStringNumbers(tokens)
     }
 
-    private fun validateTokens(tokens: List<String>, delimiter: String, input: String) {
-        tokens.forEach {
-            val nonDigit = it.firstOrNull { !it.isDigit() }
-            if (nonDigit != null)
-                throw InvalidDelimiterException(delimiter, nonDigit.toString(), input.indexOf(nonDigit))
-        }
-    }
 
     private fun getInputAndDelimiter(s: String): Pair<String, Array<String>> {
         if (s.startsWith("//")) {
@@ -32,11 +25,9 @@ class Calculator {
         return s to arrayOf(",", "\n")
     }
 
-    private fun tokenize(input: String, delimiters: Array<String>) =
-        input.split(*delimiters)
 
     private fun sumListOfStringNumbers(tokens: List<String>): Int =
-        tokens.fold(0) { acc, s ->
-            s.toInt() + acc
+        tokens.map { it.toInt() }.filter { it <= 1000 }.fold(0) { acc, s ->
+            s + acc
         }
 }
